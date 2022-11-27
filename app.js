@@ -5,10 +5,12 @@ const app = express();
 
 const homePage = require("./routes/home");
 const freeBoard = require("./routes/freeBoard");
+const dealBoard = require("./routes/dealBoard");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/client", dealBoard);
 app.use("/client", freeBoard);
 app.use(homePage);
 
