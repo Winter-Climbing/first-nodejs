@@ -15,6 +15,10 @@ router.use("/freeBoard/post", (req, res, next) => {
   next();
 });
 
+router.use("/freeBoard/register", (req, res, next) => {
+  res.sendFile(path.join(rootDir, "views", "register.html"));
+});
+
 router.get("/", (req, res, next) => {
   res.sendFile(path.join(rootDir, "views", "home.html"));
 });
