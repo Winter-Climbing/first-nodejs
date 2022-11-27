@@ -4,10 +4,12 @@ const path = require("path");
 const app = express();
 
 const homePage = require("./routes/home");
+const freeBoard = require("./routes/freeBoard");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/client", freeBoard);
 app.use(homePage);
 
 app.use((req, res, next) => {
