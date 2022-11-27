@@ -6,21 +6,21 @@ const rootDir = require("../util/path");
 const router = express.Router();
 
 router.get("/dealBoard", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "deal.html"));
+  res.render("deal.ejs");
   next();
 });
 
 router.use("/dealBoard/post", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "dealView.html"));
+  res.render("dealView.ejs");
   next();
 });
 
 router.use("/dealBoard/register", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "dealRegister.html"));
+  res.render("dealRegister.ejs");
 });
 
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "home.html"));
+  res.render("home.ejs");
 });
 
 module.exports = router;

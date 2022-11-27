@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>계명중고장터 - Main</title>
+        <title>자유게시판</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/kmu1.jpg" />
         <!-- Bootstrap icons-->
@@ -87,30 +87,25 @@
         </header>
 				<br>
 			<!--자유게시판-->
-					<center><font bold color=black size=6>일반게시판</font></center>
+					<center><font bold color=black size=6></font></center>
 					    <?$board_id=$_GET['board_id'];?>
                             <div class="col-md-5 container bg-dark text-white" id="board_write">
                                 <h4>자유게시판</h4>
-                                    <center><div id="write_area"></center>
-                                    <form enctype="multipart/form-data" action="write_ok.php?board_id=<?echo $board_id;?>" method="post">
+                                  <center><div id="write_area"></center>
+                                  <form enctype="multipart/form-data" action="/freeBoard/register/add" method="post">
                                     <div id="in_title">
-                                        <textarea name="title" id="utitle" rows="2" cols="100" placeholder="제목" maxlength="100" required></textarea>
+                                      <textarea name="title" id="utitle" rows="2" cols="100" placeholder="제목" maxlength="100" required></textarea>
                                     </div>
                                     <input class="btn btn-primary" type="file" name="SelectFile">
                                     <div class="wi_line"></div>
                                     <div id="in_content">
                                     <center><textarea name="content" id="ucontent" rows="25" cols="100" placeholder="내용" required></textarea></center>
-									
                                     </div>
- 
-                                  
- 
- 
                                     <div class="bt_se">
                                     <center><button class="btn btn-primary" type="submit">글 작성</button></center>
                                     </div>
-                                    </form>
-                                    </div>
+                                  </form>
+                              </div>
                             </div>
 
 			

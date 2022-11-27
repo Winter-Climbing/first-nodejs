@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>자유게시판</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/kmu1.jpg" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+		<link href="/bootstrap4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+			<img class="" src="/assets/kmu2.jpg"/>
+                <a class="navbar-brand" href="/">계명중고장터</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/client/dealBoard">거래게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/client/freeBoard">자유게시판</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">상품조회</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">모든 상품</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">인기 상품</a></li>
+                                <li><a class="dropdown-item" href="#!">신상품</a></li>
+                            </ul>
+                        </li>			
+                    </ul>
+                    <form class="d-flex">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+							<a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">로그인</a>
+							</li>
+						</ul>
+
+			<!-- Log-in Modal -->
+			<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="loginModalLabel"><i class="fa-solid fa-right-to-bracket"></i>&nbsp Log In</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+				<div class="modal-body">
+				<div class="row">
+				<div class="col-md-6">
+					<button type="button" class="btn btn-outline-dark btn-block btn-sm"><i class="fa-brands fa-google"></i>&nbsp Log in with Google</button>
+					<button type="button" class="btn btn-outline-dark btn-block btn-sm"><i class="fa-regular fa-envelope"></i>&nbsp Log in with E-mail</button>
+				</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-outline-dark btn-block btn-sm"><i class="fa-solid fa-envelope-circle-check"></i>&nbsp Sign up with E-mail</button>
+			</div>
+				</div>				
+				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+                        
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- 상단 안내문구-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">계명중고장터</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">계명대학교 학생을 위한 중고장터</p>
+                </div>
+            </div>
+        </header>
+				<br>
+			<!--자유게시판-->
+					<center><font bold color=black size=6></font></center>
+					    <?$board_id=$_GET['board_id'];?>
+                            <div class="col-md-5 container bg-dark text-white" id="board_write">
+                                <h4>자유게시판</h4>
+                                  <center><div id="write_area"></center>
+                                  <form enctype="multipart/form-data" action="/freeBoard/register/add" method="post">
+                                    <div id="in_title">
+                                      <textarea name="title" id="utitle" rows="2" cols="100" placeholder="제목" maxlength="100" required></textarea>
+                                    </div>
+                                    <input class="btn btn-primary" type="file" name="SelectFile">
+                                    <div class="wi_line"></div>
+                                    <div id="in_content">
+                                    <center><textarea name="content" id="ucontent" rows="25" cols="100" placeholder="내용" required></textarea></center>
+                                    </div>
+                                    <div class="bt_se">
+                                    <center><button class="btn btn-primary" type="submit">글 작성</button></center>
+                                    </div>
+                                  </form>
+                              </div>
+                            </div>
+
+			
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; 2022 웹개발과 응용 4조</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
