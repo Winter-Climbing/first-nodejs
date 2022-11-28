@@ -17,6 +17,15 @@ router.use("/dealBoard/post", (req, res, next) => {
 
 router.use("/dealBoard/register", (req, res, next) => {
   res.render("dealRegister.ejs");
+  next();
+});
+
+router.post("/client/dealAdd", (req, res, next) => {
+  res.render("dealRegister.ejs");
+});
+
+router.use("/dealBoard", (req, res, next) => {
+  res.render("home.ejs");
 });
 
 router.get("/", (req, res, next) => {

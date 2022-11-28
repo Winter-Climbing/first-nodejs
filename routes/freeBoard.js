@@ -18,10 +18,12 @@ router.use("/freeBoard/post", (req, res, next) => {
 
 router.use("/freeBoard/register", (req, res, next) => {
   res.render("register.ejs");
+  next();
 });
 
-router.use("/freeBoard/register/add", (req, res, next) => {
-  res.render("test.ejs");
+router.use("/freeBoard", (req, res, next) => {
+  res.render("free.ejs");
+  next();
 });
 
 router.get("/", (req, res, next) => {
