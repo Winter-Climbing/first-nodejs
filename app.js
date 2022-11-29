@@ -25,27 +25,23 @@ const homePage = require("./routes/home");
 
 // freeBoard
 
-app.get("/client/freeBoard", (req, res) => {
+app.use("/detail/:id", (req, res, next) => {
+  db.collection("post").findOne(
+    { _id: parseInt(req.params.id) },
+    (err, result) => {
+      res.render("view.ejs", { posts: result });
+    }
+  );
+});
+
+app.get("/client/freeBoard", (req, res, next) => {
   // 디비에 저장된 post라는 collection 안의 모든 데이터를 꺼내주세요
   db.collection("post")
     .find()
     .toArray((err, out) => {
       console.log(out);
       res.render("free.ejs", { posts: out });
-    });
-});
-
-// app.get("/client/freeBoard", (req, res, next) => {
-//   res.render("free.ejs");
-//   next();
-// });
-
-app.use("/client/freeBoard/post", (req, res, next) => {
-  db.collection("post")
-    .find()
-    .toArray((err, out) => {
-      console.log(out);
-      res.render("view.ejs", { posts: out });
+      next();
     });
 });
 
@@ -78,12 +74,6 @@ app.post("/client/freeBoard/Add", (req, res, next) => {
     );
   });
   next();
-});
-
-// 여기
-
-app.get("/", (req, res, next) => {
-  res.render("home.ejs");
 });
 
 // dealBoard
