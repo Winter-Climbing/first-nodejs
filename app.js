@@ -41,8 +41,12 @@ app.get("/client/freeBoard", (req, res) => {
 // });
 
 app.use("/client/freeBoard/post", (req, res, next) => {
-  res.render("view.ejs");
-  next();
+  db.collection("post")
+    .find()
+    .toArray((err, out) => {
+      console.log(out);
+      res.render("view.ejs", { posts: out });
+    });
 });
 
 app.use("/client/freeBoard/register", (req, res, next) => {
@@ -50,8 +54,8 @@ app.use("/client/freeBoard/register", (req, res, next) => {
   next();
 });
 
-app.post("/client/freeAdd/", (req, res, next) => {
-  res.render("free.ejs");
+app.post("/client/freeBoard/Add", (req, res, next) => {
+  res.render("add.ejs");
   console.log(req.body);
   db.collection("counter").findOne({ name: "게시물개수" }, (err, out) => {
     let totalRegister = out.totalPost;

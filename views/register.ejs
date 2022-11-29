@@ -92,7 +92,7 @@
                             <div class="col-md-5 container bg-dark text-white" id="board_write">
                                 <h4>자유게시판</h4>
                                   <center><div id="write_area"></center>
-                                  <form enctype="multipart/form-data" action="/client/freeAdd" method="post">
+                                  <form enctype="multipart/form-data" action="/client/freeBoard/Add" method="post">
                                     <div id="in_title">
                                       <textarea name="title" id="utitle" rows="2" cols="100" placeholder="제목" maxlength="100" required></textarea>
                                     </div>
@@ -106,7 +106,7 @@
                                     </div>
                                   </form>
                               </div>
-                              <form action="/client/freeAdd" method="POST">
+                              <form action="/client/freeBoard/Add" method="POST">
                                 <input type="text" name="title1">
                                 <textarea name="content1" id="" cols="30" rows="10"></textarea>
                                 <button type="submit">클릭</button>
