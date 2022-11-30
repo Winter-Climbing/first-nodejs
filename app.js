@@ -82,8 +82,13 @@ app.post("/client/freeBoard/Add", (req, res, next) => {
 // dealBoard
 
 app.get("/client/dealBoard", (req, res, next) => {
-  res.render("deal.ejs");
-  next();
+  db.collection("deal")
+    .find()
+    .toArray((err, out) => {
+      console.log(out);
+      res.render("deal.ejs", { deal: out });
+      next();
+    });
 });
 
 app.use("/client/dealBoard/post", (req, res, next) => {
