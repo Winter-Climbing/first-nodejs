@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const MongoClient = require("mongodb").MongoClient;
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const session = require("express-session");
 
 app.set("view engine", "ejs");
 
@@ -46,6 +49,25 @@ app.get("/client/freeBoard", (req, res, next) => {
       res.render("free.ejs", { posts: out });
       next();
     });
+});
+
+app.use("/edit/:id", (req, res) => {
+  db.collection("post").findOne(
+    { _id: parseInt(req.params.id) },
+    (err, result) => {
+      res.render("edit.ejs", { post: result });
+    }
+  );
+});
+
+app.put("/edit", (req, res) => {
+  db.collection("post").updateOne(
+    { _id: parseInt(req.body.id) },
+    { $set: { 제목: req.body.title1, 내용: req.body.content1 } },
+    (err, result) => {
+      console.log("수정완료");
+    }
+  );
 });
 
 app.use("/client/freeBoard/register", (req, res, next) => {
@@ -136,6 +158,57 @@ app.post("/client/dealBoard/Add", (req, res, next) => {
 
 app.get("/", (req, res, next) => {
   res.render("home.ejs");
+});
+
+app.use(
+  session({ secret: "비밀코드", resave: true, saveUninitialized: false })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/fail",
+  }),
+  (req, res) => {
+    res.redirect("/");
+  }
+);
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "id",
+      passwordField: "pw",
+      session: true,
+      passReqToCallback: false,
+    },
+    function (입력한아이디, 입력한비번, done) {
+      db.collection("login").findOne(
+        { id: 입력한아이디 },
+        function (에러, 결과) {
+          if (에러) return done(에러);
+          // 아무것도 없다면
+          if (!결과)
+            return done(null, false, { message: "존재하지않는 아이디요" });
+          if (입력한비번 == 결과.pw) {
+            return done(null, 결과);
+          } else {
+            return done(null, false, { message: "비번틀렸어요" });
+          }
+        }
+      );
+    }
+  )
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (아이디, done) {
+  done(null, {});
 });
 
 // const dealBoard = require("./routes/dealBoard");
