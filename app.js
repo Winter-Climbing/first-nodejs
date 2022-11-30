@@ -81,6 +81,15 @@ app.post("/client/freeBoard/Add", (req, res, next) => {
 
 // dealBoard
 
+app.use("/dealDetail/:id", (req, res, next) => {
+  db.collection("deal").findOne(
+    { _id: parseInt(req.params.id) },
+    (err, result) => {
+      res.render("dealView.ejs", { deal: result });
+    }
+  );
+});
+
 app.get("/client/dealBoard", (req, res, next) => {
   db.collection("deal")
     .find()
@@ -89,11 +98,6 @@ app.get("/client/dealBoard", (req, res, next) => {
       res.render("deal.ejs", { deal: out });
       next();
     });
-});
-
-app.use("/client/dealBoard/post", (req, res, next) => {
-  res.render("dealView.ejs");
-  next();
 });
 
 app.use("/client/dealBoard/register", (req, res, next) => {
