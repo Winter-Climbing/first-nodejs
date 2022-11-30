@@ -23,6 +23,9 @@ MongoClient.connect(
 
 const homePage = require("./routes/home");
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
 // freeBoard
 
 app.use("/detail/:id", (req, res, next) => {
@@ -78,12 +81,56 @@ app.post("/client/freeBoard/Add", (req, res, next) => {
 
 // dealBoard
 
-const dealBoard = require("./routes/dealBoard");
+app.get("/client/dealBoard", (req, res, next) => {
+  res.render("deal.ejs");
+  next();
+});
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/client/dealBoard/post", (req, res, next) => {
+  res.render("dealView.ejs");
+  next();
+});
 
-app.use("/client", dealBoard);
+app.use("/client/dealBoard/register", (req, res, next) => {
+  res.render("dealRegister.ejs");
+  next();
+});
+
+app.post("/client/dealBoard/Add", (req, res, next) => {
+  res.render("add.ejs");
+  console.log(req.body);
+  db.collection("dealcounter").findOne({ name: "게시물개수" }, (err, out) => {
+    let totalRegister = out.totalPost;
+
+    db.collection("deal").insertOne(
+      {
+        _id: totalRegister + 1,
+        제목: req.body.title,
+        내용: req.body.content,
+      },
+      () => {
+        db.collection("dealcounter").updateOne(
+          { name: "게시물개수" },
+          { $inc: { totalPost: 1 } },
+          (err, out) => {
+            if (err) return console.log(err);
+          }
+        );
+      }
+    );
+  });
+});
+
+// app.use("/dealBoard", (req, res, next) => {
+//   res.render("home.ejs");
+// });
+
+app.get("/", (req, res, next) => {
+  res.render("home.ejs");
+});
+
+// const dealBoard = require("./routes/dealBoard");
+// app.use("/client", dealBoard);
 // app.use("/client", freeBoard);
 app.use(homePage);
 
