@@ -87,30 +87,30 @@
         </header>
 				<br>
 			<!--자유게시판-->
-					<center><font bold color=black size=6></font></center>
-					    <?$board_id=$_GET['board_id'];?>
-                            <div class="col-md-5 container bg-dark text-white" id="board_write">
-                                <h4>자유게시판</h4>
-                                  <center><div id="write_area"></center>
-                                  <form enctype="multipart/form-data" action="/client/freeBoard/Add" method="post">
-                                    <div id="in_title">
-                                      <textarea name="title" id="utitle" rows="2" cols="100" placeholder="제목" maxlength="100" required></textarea>
-                                    </div>
-                                    <input class="btn btn-primary" type="file" name="SelectFile">
-                                    <div class="wi_line"></div>
-                                    <div id="in_content">
-                                    <center><textarea name="content" id="ucontent" rows="25" cols="100" placeholder="내용" required></textarea></center>
-                                    </div>
-                                    <div class="bt_se">
-                                    <center><button class="btn btn-primary" type="submit">글 작성</button></center>
-                                    </div>
-                                  </form>
-                              </div>
-                              <form action="/edit?_method=PUT" method="POST">
+                              <form action="/edit?_method=PUT" method="POST" class="container">
+                                <h2>자유게시판 글쓰기</h2>
                                 <input value="<%= post._id %>" name="id" style="display : none">
-                                <input value="<%= post.제목 %>" type="text" name="title1">
-                                <textarea name="content1" id="" cols="30" rows="10"><%= post.내용 %></textarea>
-                                <button type="submit">수정하기</button>
+                                <table class="table table-hover">
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <input value="<%= post.제목 %>" type="text" name="title1"                 class="form-control"
+                                        placeholder="글 제목"
+                                        maxlength="40">
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <textarea                 class="form-control"
+                                        placeholder="글 내용을 작성하세요"
+                                        name="content1"
+                                        maxlength="1024"
+                                        style="height: 400px"><%= post.내용 %></textarea>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <button type="submit"  class="btn btn-primary pull-right m-auto">수정하기</button>
                               </form>
                             </div>
 
