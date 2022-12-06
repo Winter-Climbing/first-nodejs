@@ -18,8 +18,8 @@ MongoClient.connect(
 
     db = client.db("firstwep");
 
-    app.listen(7000, () => {
-      console.log("listening on 7000");
+    app.listen(8080, () => {
+      console.log("listening on 8080");
     });
   }
 );
